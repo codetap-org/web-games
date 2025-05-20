@@ -1,0 +1,12 @@
+body {
+  font-family: "Pacifico";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+canvas {
+  border: 1x solid #0a3cda;
+  margin: 10px;
+}
