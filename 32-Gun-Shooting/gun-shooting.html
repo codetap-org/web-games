@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Gun Shooting</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style>
+			.txt {
+				transform: translate(-15px, -60px);
+				z-index: 999;
+				font-size: 1.4rem;
+				font-family: Arial, Helvetica, sans-serif;
+				font-weight: 700;
+				pointer-events: none;
+				color: #e64c78;
+				width: 20rem;
+				opacity: 0;
+				transition: 0.2s;
+			}
+
+			.txt.show {
+				opacity: 1;
+				transform: translate(-15px, -80px);
+			}
+
+			body {
+				margin: 0;
+				background: #2a363b;
+				overflow: hidden;
+			}
+
+			.container {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+			}
+
+			/* The Player */
+			.player {
+				position: absolute;
+				top: 200px;
+				left: 200px;
+				transform: translateX(-50%) translateY(-50%);
+				width: 45px;
+				height: 55px;
+				background: white;
+				border-radius: 10px;
+				z-index: 5;
+				/* The Hat is good*/
+				/* Eyes */
+				/* The Mouth */
+				/* The Shirt (and tie) */
+				/* The Arms */
+				/* Legs */
+				/* Shadow */
+			}
+			.player .hat {
+				position: absolute;
+				top: 15%;
+				transform: translateY(-100%);
+				width: 100%;
+				height: 34%;
+				background: #d32c1b;
+				border-top-right-radius: 10px;
+				border-top-left-radius: 10px;
+			}
+			.player .hat::after {
+				content: '';
+				position: absolute;
+				top: 100%;
+				left: 100%;
+				width: 35%;
+				height: 2px;
+				background: #d32c1b;
+				transform: translateY(-100%);
+			}
+			.player .eye {
+				position: absolute;
+				width: 5px;
+				height: 5px;
+				background: black;
+				top: 25%;
+			}
+			.player .eye.right {
+				right: 10%;
+			}
+			.player .eye.left {
+				right: 50%;
+			}
+			.player .mouth {
+				position: absolute;
+				top: 40%;
+				width: 20%;
+				height: 2px;
+				background: black;
+				left: 65%;
+			}
+			.player .shirt {
+				position: absolute;
+				bottom: -1px;
+				width: 105%;
+				height: 50%;
+				left: 50%;
+				transform: translateX(-50%);
+				background: #cf2213;
+				border-radius: 10px;
+				border-top-right-radius: 0px;
+				border-top-left-radius: 0px;
+				overflow: hidden;
+				/* The Undershirt */
+			}
+			.player .shirt .tie {
+				background: #e31b15;
+				width: 10%;
+				height: 70%;
+				position: absolute;
+				top: 0;
+				left: 55%;
+				border-bottom-right-radius: 5px;
+				border-bottom-left-radius: 55px;
+			}
+			.player .shirt .under {
+				position: absolute;
+				left: 60%;
+				top: 0px;
+				width: 40%;
+				height: 99%;
+				transform: translateX(-50%);
+				background: #fff5f4;
+			}
+			.player .arm {
+				position: absolute;
+				width: 25%;
+				height: 40%;
+				background: white;
+				border-radius: 10px;
+				top: 60%;
+				transform-origin: 50% 5%;
+			}
+			.player .arm.right {
+				right: -10%;
+				transform: rotate(-1.5rad);
+				z-index: 0;
+			}
+			.player .arm.right .gun {
+				position: absolute;
+				top: 80%;
+				left: 100%;
+				width: 100%;
+				height: 150%;
+				background: black;
+				transform-origin: -100% 0%;
+			}
+			.player .arm.right .gun::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 250%;
+				height: 40%;
+				background: black;
+			}
+			.player .arm.right .gun .barrel {
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				width: 1px;
+				height: 1px;
+				transform: translateX(-50%) translateY(-50%);
+			}
+			.player .arm.left {
+				left: -5%;
+			}
+			.player .arm .sleeve {
+				position: absolute;
+				top: 0;
+				left: 0;
+				border-radius: 10px;
+				background: #e31b15;
+				width: 100%;
+				height: 50%;
+				border-bottom-right-radius: 0px;
+				border-bottom-left-radius: 0px;
+			}
+			.player .leg {
+				position: absolute;
+				top: 80%;
+				width: 25%;
+				height: 45%;
+				background: white;
+				border-radius: 10px;
+				z-index: -1;
+				transform-origin: 50% 5%;
+				transform: translateX(-50%);
+			}
+			.player .leg.right {
+				right: -5%;
+			}
+			.player .leg.left {
+				left: 20%;
+			}
+			.player .leg .pant {
+				position: absolute;
+				width: 100%;
+				height: 80%;
+				top: 0;
+				left: 0;
+				background: #4093bd;
+			}
+			.player::after {
+				content: '';
+				position: absolute;
+				top: 115%;
+				left: 50%;
+				transform: translateX(-50%);
+				background: RGBA(0, 0, 0, 0.2);
+				z-index: -2;
+				width: 100%;
+				height: 10px;
+				border-radius: 50%;
+			}
+
+			/* Bullets */
+			.bullet {
+				position: absolute;
+				width: 25px;
+				height: 15px;
+				background: yellow;
+				transform: translateX(-50%) translateY(-50%);
+				z-index: 10;
+			}
+
+			/* Bullet Flash */
+			.flash {
+				position: absolute;
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				background: white;
+				transform: translateX(-50%) translateY(-50%);
+			}
+
+			/* Smoke Clouds */
+			.cloud {
+				position: absolute;
+				background: Silver;
+				border-radius: 50%;
+				transform: translateX(-50%) translateY(-50%);
+			}
+
+			/* Enemies */
+			.enemy {
+				position: absolute;
+				transform: translateX(-50%) translateY(-50%);
+				/* Good ol' Jimmy */
+			}
+			.enemy.jimmy {
+				width: 35px;
+				height: 35px;
+				background: #fecea8;
+				border-radius: 10px;
+			}
+			.enemy.jimmy .eye {
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: black;
+				position: absolute;
+				top: 20%;
+			}
+			.enemy.jimmy .eye.right {
+				right: 10%;
+			}
+			.enemy.jimmy .eye.left {
+				right: 50%;
+			}
+			.enemy.jimmy .mouth {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 35%;
+				height: 10px;
+				background: black;
+			}
+			.enemy.jimmy .arm {
+				position: absolute;
+				width: 20%;
+				height: 60%;
+				border-radius: 10px;
+				background: #fecea8;
+				transform-origin: 50% 5%;
+				top: 5px;
+				transform: rotate(125deg);
+				z-index: -1;
+			}
+			.enemy.jimmy .arm.right {
+				right: 0;
+			}
+			.enemy.jimmy .arm.left {
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container"></div>
+
+		<script>
+			document.body.addEventListener('click', () => {
+				const text = document.querySelector('.txt');
+				text.classList.add('show'); // Set opacity to 1 immediately
+				setTimeout(() => {
+					text.classList.remove('show'); // Reset opacity to 0 after 100ms
+				}, 500);
+			});
+
+			var SHOOT_KNOCKBACK = 5;
+			var SHOOT_KNOCKBACKRESET = 0.25;
+
+			var mouse = {
+				x: 0,
+				y: 0,
+			};
+
+			// The Player class
+			class Player {
+				constructor(options) {
+					// Store references
+					this.controls = options.controls;
+					this.createBullet = options.createBullet;
+					this.createSmoke = options.createSmoke;
+
+					// Creating the player element
+					this.createElement(options.parentContainer);
+
+					// Position/movement
+					this.x = window.innerWidth / 2;
+					this.y = window.innerHeight / 2;
+					this.xvel = 0;
+					this.yvel = 0;
+					this.friction = 0.8;
+					this.speed = 0.8;
+					this.scaleX = 1;
+					this.width = 40;
+					this.height = 40;
+
+					// Anim
+					this.anim = {
+						counter: 0,
+						inc: Math.PI / 10,
+						rightArm: {
+							rot: 0,
+							offsetX: 0,
+							offsetY: 0,
+						},
+						leftArm: {
+							rot: 0,
+						},
+						leftLeg: {
+							rot: 0,
+						},
+						rightLeg: {
+							rot: 0,
+						},
+						gun: {
+							rot: 0,
+						},
+						lift: 0,
+						knockback: 0,
+					};
+
+					// Shooting
+					this.shoot();
+
+					// Updating
+					options.startUpdating(this.aim.bind(this));
+					options.startUpdating(this.turn.bind(this));
+					options.startUpdating(this.move.bind(this));
+					options.startUpdating(this.animate.bind(this));
+					options.startUpdating(this.boundaries.bind(this));
+					options.startUpdating(this.updateStyles.bind(this));
+				}
+
+				// Creating / injecting the element
+				createElement(parentContainer) {
+					// The Markup
+					this.el = $(`
+          <div class="player">
+            <p class="txt">Bang!❤️</p>
+            <div class='hat'></div>
+            <div class='eye right'></div>
+            <div class='eye left'></div>
+            <div class='mouth'></div>
+            <div class='shirt'>
+              <div class='under'></div>
+            </div>
+            <div class='arm right'>
+              <div class='sleeve'></div>
+              <div class='gun'>
+                <div class='grey'></div>
+                <div class='barrel'></div>
+              </div>
+            </div>
+            <div class='arm left'>
+              <div class='sleeve'></div>
+            </div>
+            <div class='leg right'>
+              <div class='pant'></div>
+            </div>
+            <div class='leg left'>
+              <div class='pant'></div>
+            </div>
+          </div>
+        `);
+
+					// Injection
+					parentContainer.append(this.el);
+
+					// Update dimensions
+					this.width = this.el.outerWidth();
+					this.height = this.el.outerHeight();
+				}
+
+				// Animate the player
+				animate() {
+					var isMoving =
+						this.controls.isDown('right') ||
+						this.controls.isDown('left') ||
+						this.controls.isDown('up') ||
+						this.controls.isDown('down')
+							? true
+							: false;
+
+					// Running animation
+					if (isMoving) {
+						// Arms
+						this.anim.leftArm.rot = Math.sin(this.anim.counter) / 2;
+
+						// Legs
+						this.anim.rightLeg.rot = Math.sin(this.anim.counter * 0.9) * 0.5;
+						this.anim.leftLeg.rot = Math.sin(-this.anim.counter * 0.9) * 0.5;
+
+						// Lift
+						this.anim.lift = Math.sin(this.anim.counter) * 5;
+
+						// Inc
+						this.anim.counter += this.anim.inc;
+					} else {
+						// Resetting to idle state
+						var leftArm = this.anim.leftArm.rot;
+						var rightLeg = this.anim.rightLeg.rot;
+						var leftLeg = this.anim.leftLeg.rot;
+						var lift = this.anim.lift;
+						var resetSpeed = 0.1;
+
+						// Arms
+						this.anim.leftArm.rot = leftArm - (leftArm - 0) * resetSpeed;
+
+						// Legs
+						this.anim.rightLeg.rot = rightLeg - (rightLeg - 0) * resetSpeed;
+						this.anim.leftLeg.rot = leftLeg - (leftLeg - 0) * resetSpeed;
+
+						// Lift
+						this.anim.lift = lift - (lift - 0) * resetSpeed;
+					}
+
+					// Shooting
+					var rightArmRot = this.anim.rightArm.rot;
+					this.anim.rightArm.offsetX =
+						Math.cos(rightArmRot - Math.PI / 2) * this.anim.knockback;
+					this.anim.rightArm.offsetY =
+						Math.sin(rightArmRot - Math.PI / 2) * this.anim.knockback;
+					this.anim.gun.rot = -this.anim.knockback * 0.1;
+
+					// Resetting the knockback
+					this.anim.knockback =
+						this.anim.knockback -
+						(this.anim.knockback - 0) * SHOOT_KNOCKBACKRESET;
+				}
+
+				// Aiming at the mouse
+				aim() {
+					var rightArm = $('.player .arm.right');
+					var armX = rightArm.offset().left;
+					var armY = rightArm.offset().top;
+					var angle = Math.atan2(mouse.y - armY, mouse.x - armX);
+					this.anim.rightArm.rot = (angle - Math.PI / 2) * this.scaleX;
+				}
+
+				// Facing the mouse
+				turn() {
+					if (mouse.x < this.x) {
+						this.scaleX = -1;
+					} else {
+						this.scaleX = 1;
+					}
+				}
+
+				// Movement
+				move() {
+					// Physics
+					this.x += this.xvel;
+					this.y += this.yvel;
+					this.xvel *= this.friction;
+					this.yvel *= this.friction;
+
+					// Keys
+					if (this.controls.isDown('right')) {
+						this.xvel += this.speed;
+					} else if (this.controls.isDown('left')) {
+						this.xvel -= this.speed;
+					}
+					if (this.controls.isDown('up')) {
+						this.yvel -= this.speed;
+					} else if (this.controls.isDown('down')) {
+						this.yvel += this.speed;
+					}
+				}
+
+				// Staying on screen
+				boundaries() {
+					if (this.x - this.width / 2 < 0) {
+						this.x = this.width / 2 + 1;
+						this.xvel = 0;
+					} else if (this.x + this.width / 2 > window.innerWidth) {
+						this.x = window.innerWidth - this.width / 2 - 1;
+						this.xvel = 0;
+					}
+					if (this.y - this.height / 2 < 0) {
+						this.y = this.height / 2 + 1;
+						this.yvel = 0;
+					} else if (this.y + this.height / 2 > window.innerHeight) {
+						this.y = window.innerHeight - this.height / 2 - 1;
+						this.yvel = 0;
+					}
+				}
+
+				// Listen for mousepresses and shoot
+				shoot() {
+					$(window).on(
+						'mousedown',
+						function () {
+							var barrel = $('.barrel');
+							var x = barrel.offset().left;
+							var y = barrel.offset().top;
+							var dir = this.anim.rightArm.rot * this.scaleX;
+
+							// Create the bullet
+							this.createBullet(x, y, dir);
+
+							// Knockback animations
+							this.anim.knockback = SHOOT_KNOCKBACK;
+
+							// Pushback the player
+							this.xvel += Math.cos(dir - Math.PI / 2) * 2.5;
+							this.yvel += Math.sin(dir - Math.PI / 2) * 2.5;
+
+							// Smoke
+							this.createSmoke(x, y, dir, 1);
+						}.bind(this)
+					);
+				}
+
+				// Updating the styles
+				updateStyles() {
+					var rightArm = $('.player .arm.right');
+					var leftArm = $('.player .arm.left');
+					var rightLeg = $('.leg.right');
+					var leftLeg = $('.leg.left');
+					var gun = $('.gun');
+
+					// Main el
+					this.el.css({
+						left: this.x,
+						top: this.y,
+						transform: `
+            translateX(-50%)
+            translateY(-${50 + this.anim.lift}%)
+            scaleX(${this.scaleX})
+          `,
+					});
+
+					// Arms
+					rightArm.css({
+						transform: `
+            translateX(${this.anim.rightArm.offsetX}px)
+            translateY(${this.anim.rightArm.offsetY}px)
+            rotate(${this.anim.rightArm.rot}rad)
+          `,
+					});
+					leftArm.css({
+						transform: `rotate(${this.anim.leftArm.rot}rad)`,
+					});
+
+					// Legs
+					rightLeg.css({
+						transform: `
+            translateX(-50%)
+            rotate(${this.anim.rightLeg.rot}rad)
+          `,
+					});
+					leftLeg.css({
+						transform: `
+            translateX(-50%)
+            rotate(${this.anim.leftLeg.rot}rad)
+          `,
+					});
+
+					// Gun
+					gun.css({
+						transform: `rotate(${this.anim.gun.rot}rad)`,
+					});
+				}
+			}
+
+			// The Bullet class
+			class Bullet {
+				constructor(options) {
+					// Create the element
+					this.createElement(options.parentContainer);
+					this.createFlash(options.parentContainer, options.x, options.y);
+
+					// Positioning / movement
+					this.x = options.x;
+					this.y = options.y;
+					this.speed = 25;
+					this.dir = options.dir;
+
+					// Flash
+					this.flashTimer = 0;
+				}
+
+				// Creating / injecting the Player element
+				createElement(parentContainer) {
+					// The markup
+					this.el = $('<div class="bullet"></div>');
+
+					// Injection
+					parentContainer.append(this.el);
+
+					// Dimensions
+					this.width = parseInt(this.el.css('width'));
+					this.height = parseInt(this.el.css('height'));
+				}
+
+				// Create the flash effect element
+				createFlash(parentContainer, x, y) {
+					// The markup
+					this.flashEl = $('<div class="flash"></div>');
+
+					// Positioning
+					this.flashEl.css({
+						left: x,
+						top: y,
+					});
+
+					// Injection
+					parentContainer.append(this.flashEl);
+				}
+
+				// Updating (executed automatically by the `BulletHandler`
+				// class.)
+				update() {
+					// Movement
+					this.x += Math.cos(this.dir + Math.PI / 2) * this.speed;
+					this.y += Math.sin(this.dir + Math.PI / 2) * this.speed;
+
+					// Going out of bounds
+					if (
+						this.x < 0 ||
+						this.y < 0 ||
+						this.x > window.innerWidth ||
+						this.y > window.innerHeight
+					) {
+						this.delete = true;
+					}
+
+					// Update styles
+					this.el.css({
+						left: this.x,
+						top: this.y,
+						transform: `
+            translateX(-50%)
+            translateY(-50%)
+            rotate(${this.dir + Math.PI / 2}rad)
+          `,
+					});
+
+					// Removing the flash
+					this.flashTimer++;
+					if (this.flashTimer > 1) {
+						this.flashEl.remove();
+					}
+				}
+			}
+
+			// The Bullet Handler class
+			class BulletHandler {
+				constructor(options) {
+					// Store options references
+					this.parentContainer = options.parentContainer;
+
+					// Store all bullets
+					this.bullets = [];
+
+					// Updating all bullets
+					options.startUpdating(this.updateBullets.bind(this));
+
+					// Binding public functions
+					this.createBullet = this.createBullet.bind(this);
+				}
+
+				// Updating all of the bullets
+				updateBullets() {
+					for (var i = 0; i < this.bullets.length; i++) {
+						this.bullets[i].update();
+
+						// Removing bullets
+						if (this.bullets[i].delete) {
+							this.bullets[i].el.remove();
+							this.bullets[i].flashEl.remove();
+							this.bullets.splice(i, 1);
+						}
+					}
+				}
+
+				// Create a new bullet
+				createBullet(x, y, dir) {
+					this.bullets.push(
+						new Bullet({
+							x: x,
+							y: y,
+							dir: dir,
+							parentContainer: this.parentContainer,
+						})
+					);
+				}
+			}
+
+			// The Controls class
+			class Controls {
+				constructor(options) {
+					this.keys = [
+						{
+							name: 'right',
+							keyCode: 68,
+						},
+						{
+							name: 'left',
+							keyCode: 65,
+						},
+						{
+							name: 'up',
+							keyCode: 87,
+						},
+						{
+							name: 'down',
+							keyCode: 83,
+						},
+					];
+
+					// Listening for keypresses
+					this.createListeners();
+
+					// Binding public functions
+					this.isDown = this.isDown.bind(this);
+				}
+
+				// Get a key object based on it's keycode
+				getKey(keyCode) {
+					for (var i = 0; i < this.keys.length; i++) {
+						if (this.keys[i].keyCode === keyCode) {
+							return this.keys[i];
+						}
+					}
+				}
+
+				// Check if a key is down
+				isDown(key) {
+					for (var i = 0; i < this.keys.length; i++) {
+						if (this.keys[i].name == key) {
+							return this.keys[i].isDown;
+						}
+					}
+				}
+
+				// Create the keydown event listener
+				createListeners() {
+					// Key presses
+					$(window).on(
+						'keydown',
+						function (e) {
+							var pressedKey = this.getKey(e.which);
+
+							if (pressedKey != null) {
+								pressedKey.isDown = true;
+							}
+						}.bind(this)
+					);
+
+					// Key released
+					$(window).on(
+						'keyup',
+						function (e) {
+							var pressedKey = this.getKey(e.which);
+
+							if (pressedKey != null) {
+								pressedKey.isDown = false;
+							}
+						}.bind(this)
+					);
+				}
+			}
+
+			// The Smoke class (🌲)
+			var SMOKE_COUNT = [2, 4];
+			var SMOKE_SPEED = [5, 10];
+			var SMOKE_SIZE = [5, 10];
+			var SMOKE_FRICTION = 0.85;
+			var SMOKE_FADESPEED = 0.035;
+			var SMOKE_SPREAD = 0.5;
+			class Smoke {
+				constructor(options) {
+					// Store the parentContainer reference
+					this.parentContainer = options.parentContainer;
+
+					// The clouds
+					this.clouds = [];
+
+					// Updating
+					options.startUpdating(this.update.bind(this));
+
+					// Binding public functions
+					this.create = this.create.bind(this);
+				}
+
+				// Create a cloud puff
+				create(x, y, dir, intensity) {
+					// Creating the individual clouds
+					var createCloud = function (x, y, dir, intensity) {
+						// The cloud element
+						var el = $('<div class="cloud"></div>');
+
+						// Positioning and sizing
+						var size = getRandom(SMOKE_SIZE[0], SMOKE_SIZE[1]) * intensity;
+						el.css({
+							left: x,
+							top: y,
+							width: size,
+							height: size,
+						});
+
+						// Spread
+						dir += getRandom(-SMOKE_SPREAD * 100, SMOKE_SPREAD * 100) / 100;
+
+						// Movement
+						var speed = getRandom(SMOKE_SPEED[0], SMOKE_SPEED[1]) * intensity;
+						var xvel = Math.cos(dir + Math.PI / 2) * speed;
+						var yvel = Math.sin(dir + Math.PI / 2) * speed;
+
+						// Return the cloud object
+						return {
+							el: el,
+							x: x,
+							y: y,
+							dir: dir,
+							xvel: xvel,
+							yvel: yvel,
+							opacity: 1,
+						};
+					};
+
+					// Generating the clouds
+					var count = getRandom(SMOKE_COUNT[0], SMOKE_COUNT[1]);
+					for (var i = 0; i < count; i++) {
+						var newCloud = createCloud(x, y, dir, intensity);
+
+						// Store the cloud object
+						this.clouds.push(newCloud);
+
+						// Inject the cloud element
+						this.parentContainer.append(newCloud.el);
+					}
+				}
+
+				// Updating the clouds
+				update() {
+					for (var i = 0; i < this.clouds.length; i++) {
+						var cloud = this.clouds[i];
+
+						// Movement
+						cloud.x += cloud.xvel;
+						cloud.y += cloud.yvel;
+						cloud.xvel *= SMOKE_FRICTION;
+						cloud.yvel *= SMOKE_FRICTION;
+
+						// Opacity
+						cloud.opacity -= SMOKE_FADESPEED;
+
+						// Updating styles
+						cloud.el.css({
+							left: cloud.x,
+							top: cloud.y,
+							opacity: cloud.opacity,
+						});
+
+						// Removing it
+						if (cloud.opacity <= 0) {
+							cloud.el.remove();
+							this.clouds.splice(i, 1);
+						}
+					}
+				}
+			}
+
+			// Enemies
+			class EnemyHandler {
+				constructor(options) {
+					// Storing references
+					this.parentContainer = options.parentContainer;
+
+					// All the enemies
+					this.enemies = [];
+
+					// Updating
+					options.startUpdating(this.updateEnemies.bind(this));
+
+					// Binding public functions
+					this.createEnemy = this.createEnemy.bind(this);
+				}
+
+				// Update all of the enemies n shit
+				updateEnemies() {
+					for (var i = 0; i < this.enemies.length; i++) {}
+				}
+
+				// Create a new enemy
+				createEnemy(x, y) {
+					var enemyIndex = Math.floor(getRandom(0, enemyTypes.length));
+					var enemyData = enemyTypes[enemyIndex];
+
+					// Create the new object
+					var newEnemy = {
+						x: x,
+						y: y,
+						el: $(enemyData.markup),
+						animate: enemyData.animate,
+						update: enemyData.update,
+					};
+
+					// Inject the element
+					this.parentContainer.append(newEnemy.el);
+
+					// Position the element
+					newEnemy.el.css({
+						left: x,
+						top: y,
+					});
+
+					// Store the enemy object
+					this.enemies.push(newEnemy);
+				}
+			}
+
+			// Rooms
+			class RoomHandler {
+				constructor(options) {
+					// Store references
+					this.parentContainer = options.parentContainer;
+					this.createEnemy = options.createEnemy;
+
+					// Load a room on init
+					this.newRoom();
+				}
+
+				// Unloading / loading a room
+				newRoom() {
+					var roomIndex = Math.floor(getRandom(0, rooms.length));
+					var roomData = rooms[roomIndex];
+
+					// Generate everything
+					for (var i = 0; i < roomData.length; i++) {
+						var item = roomData[i];
+
+						// Enemies
+						if (item.type === 'enemy') {
+							this.createEnemy(
+								(window.innerWidth * item.x) / 100,
+								(window.innerHeight * item.y) / 100
+							);
+						}
+					}
+				}
+			}
+
+			// The Game class
+			class Game {
+				constructor() {
+					// The container element
+					this.container = $('.container');
+
+					// Updating
+					this.updateQueue = [];
+					this.update();
+
+					// Enemies
+					this.enemyHandler = new EnemyHandler({
+						parentContainer: this.container,
+						startUpdating: this.startUpdating.bind(this),
+					});
+
+					// Rooms
+					this.roomHandler = new RoomHandler({
+						parentContainer: this.container,
+						startUpdating: this.startUpdating.bind(this),
+						createEnemy: this.enemyHandler.createEnemy,
+					});
+
+					// The controls
+					this.controls = new Controls();
+
+					// Smoke
+					this.smoke = new Smoke({
+						parentContainer: this.container,
+						startUpdating: this.startUpdating.bind(this),
+					});
+
+					// Bullets
+					this.bulletHandler = new BulletHandler({
+						parentContainer: this.container,
+						startUpdating: this.startUpdating.bind(this),
+					});
+
+					// The player
+					this.player = new Player({
+						parentContainer: this.container,
+						startUpdating: this.startUpdating.bind(this),
+						controls: this.controls,
+						createBullet: this.bulletHandler.createBullet,
+						createSmoke: this.smoke.create,
+					});
+				}
+
+				// Adding a function to the update queue.
+				startUpdating(func) {
+					this.updateQueue.push(func);
+				}
+
+				// Updating the queue
+				update() {
+					for (var i = 0; i < this.updateQueue.length; i++) {
+						this.updateQueue[i]();
+					}
+					window.requestAnimationFrame(this.update.bind(this));
+				}
+			}
+
+			// Tracking the mouse position
+			$(window).on('mousemove', function (e) {
+				mouse.x = e.pageX;
+				mouse.y = e.pageY;
+			});
+
+			// Get a random number
+			function getRandom(min, max) {
+				return Math.random() * (max - min) + min;
+			}
+
+			// ******************************** \\
+			// ***********The Rooms************ \\
+			// ******************************** \\
+
+			/*
+      
+      Info - The room data below holds information about
+            what items can spawn where.
+            
+            Positions are used as percentages to ensure
+            Everything fits on the screen.
+            
+            I would have used the typical tilemap row/column
+            array technique, but the rooms are so simple
+            I figured this alternative would be sufficient.
+            
+            This concept could be expanded to include items,
+            spawning odds, secrets, and basically any other
+            object-based mechanic you would implement into
+            the game.
+
+    */
+			var rooms = [];
+			rooms[0] = [
+				//I am not adding any of them now.
+			];
+
+			// ******************************** \\
+			// **********Enemy Types*********** \\
+			// ******************************** \\
+
+			/*
+      
+      Info - This array contains info on enemy markup,
+            AI, etc.,
+            
+            If you do not specify an update function
+            it will default to one defined in the 
+            `EnemyHandler` class.
+
+    */
+
+			var enemyTypes = [];
+			enemyTypes[0] = {
+				markup: `
+        <div class="enemy jimmy">
+          <div class='eye right'></div>
+          <div class='eye left'></div>
+          <div class='mouth'></div>
+          <div class='arm right'></div>
+          <div class='arm left'></div>
+          <div class='leg right'></div>
+          <div class='leg left'></div>
+        </div>
+      `,
+				animate: function (counter) {},
+			};
+
+			// Start the game
+			new Game();
+		</script>
+	</body>
+</html>
