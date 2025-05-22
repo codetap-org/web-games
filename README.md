@@ -34,7 +34,8 @@ This repository contains a collection of HTML, CSS, and JavaScript games. 🎯�
 | 28  | [Emoji Catcher Game](https://github.com/codetap-org/web-games/tree/main/28-Emoji-Catcher-Game)                 | [Live Demo](https://codetap-org.github.io/web-games/28-Emoji-Catcher-Game/)         |
 | 29  | [Whack A Mole Game](https://github.com/codetap-org/web-games/tree/main/29-Whack-A-Mole-Game)                   | [Live Demo](https://codetap-org.github.io/web-games/29-Whack-A-Mole-Game/)          |
 | 30  | [Simon Says Game](https://github.com/codetap-org/web-games/tree/main/30-Simon-Says-Game)                       | [Live Demo](https://codetap-org.github.io/web-games/30-Simon-Says-Game/)            |
-| 30  | [Bobble Bubble Game](https://github.com/codetap-org/web-games/tree/main/31-Bobble-Bubble-Game)                       | [Live Demo](https://codetap-org.github.io/web-games/31-Bobble-Bubble-Game/)            |
+| 31  | [Bobble Bubble Game](https://github.com/codetap-org/web-games/tree/main/31-Bobble-Bubble-Game)                 | [Live Demo](https://codetap-org.github.io/web-games/31-Bobble-Bubble-Game/)         |
+| 32  | [Gun Shooting Game](https://github.com/codetap-org/web-games/tree/main/32-Gun-Shooting-Game)                  | [Live Demo](https://codetap-org.github.io/web-games/32-Gun-Shooting-Game/)         |
 
 ## Games Description
 
@@ -69,3 +70,4 @@ This repository contains a collection of HTML, CSS, and JavaScript games. 🎯�
 29. **Whack-a-Mole Game**: Test your reaction speed by hitting randomly appearing moles with a mallet before they disappear in this classic arcade game. 🕹️
 30. **Simon Says Game**: Follow the color sequence and repeat it correctly to advance through levels. Test your memory and speed in this classic memory game! 🎮💡
 31. **Bobble Bubble Game**: Challenge your memory and reflexes in this fun and fast-paced color pattern game! 🎮✨ Repeat the color sequence accurately to move through levels and boost your score. Perfect for players who love classic memory challenges with a twist! 🧠💥
+32. **Gun Shooting Game**: Challenge your memory and reflexes in this fun and fast-paced color pattern game! 🎮✨ Repeat the color sequence accurately to move through levels and boost your score. Perfect for players who love classic memory challenges with a twist! 🧠💥
