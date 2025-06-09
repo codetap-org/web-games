@@ -39,3 +39,4 @@ This repository contains a collection of HTML, CSS, and JavaScript games. ðŸŽ¯ðŸ
 | 33  | [Stick Hero Game](https://github.com/codetap-org/web-games/tree/main/33-Stick-Hero-Game)                        | [Live Demo](https://codetap-org.github.io/web-games/33-Stick-Hero-Game/)            |
 | 34  | [Chess Game](https://github.com/codetap-org/web-games/tree/main/34-Chess-Game)                                  | [Live Demo](https://codetap-org.github.io/web-games/34-Chess-Game/)                 |
 | 35  | [Lava Game](https://github.com/codetap-org/web-games/tree/main/35-Lava-Game)                                    | [Live Demo](https://codetap-org.github.io/web-games/35-Lava-Game/)                  |
+| 36  | [House Build Game](https://github.com/codetap-org/web-games/tree/main/36-House-Build-Game)                      | [Live Demo](https://codetap-org.github.io/web-games/36-House-Build-Game/)           |
