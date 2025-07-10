@@ -42,3 +42,5 @@ This repository contains a collection of HTML, CSS, and JavaScript games. ðŸŽ¯ðŸ
 | 36  | [House Build Game](https://github.com/codetap-org/web-games/tree/main/36-House-Build-Game)                           | [Live Demo](https://codetap-org.github.io/web-games/36-House-Build-Game/)              |
 | 37  | [Goal Game](https://github.com/codetap-org/web-games/tree/main/37-Goal-Game)                                         | [Live Demo](https://codetap-org.github.io/web-games/37-Goal-Game/)                     |
 | 38  | [Stone Paper and Scissors Game](https://github.com/codetap-org/web-games/tree/main/38-Stone-Paper-And-Scissors-Game) | [Live Demo](https://codetap-org.github.io/web-games/38-Stone-Paper-And-Scissors-Game/) |
+| 39  | [Rubiks Cube Game](https://github.com/codetap-org/web-games/tree/main/39-Rubiks-Cube-Game)                           | [Live Demo](https://codetap-org.github.io/web-games/39-Rubiks-Cube-Game/)              |
+| 40  | [Toast Catcher Game](https://github.com/codetap-org/web-games/tree/main/40-Toast-Catcher-Game)                       | [Live Demo](https://codetap-org.github.io/web-games/40-Toast-Catcher-Game/)            |
