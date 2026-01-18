@@ -45,3 +45,4 @@ This repository contains a collection of HTML, CSS, and JavaScript games. ðŸŽ¯ðŸ
 | 39  | [Rubiks Cube Game](https://github.com/codetap-org/web-games/tree/main/39-Rubiks-Cube-Game)                           | [Live Demo](https://codetap-org.github.io/web-games/39-Rubiks-Cube-Game/)              |
 | 40  | [Toast Catcher Game](https://github.com/codetap-org/web-games/tree/main/40-Toast-Catcher-Game)                       | [Live Demo](https://codetap-org.github.io/web-games/40-Toast-Catcher-Game/)            |
 | 41  | [Spiky Dasher Game](https://github.com/codetap-org/web-games/tree/main/41-Spiky-Dasher-Game)                         | [Live Demo](https://codetap-org.github.io/web-games/41-Spiky-Dasher-Game/)             |
+| 42  | [Stack Game](https://github.com/codetap-org/web-games/tree/main/42-Stack-Game)                                       | [Live Demo](https://codetap-org.github.io/web-games/42-Stack-Game/)                    |
