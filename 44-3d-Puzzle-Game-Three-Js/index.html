@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive 3D Puzzle Game (Three.js + GSAP) | CodeTap</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+</head>
+
+<body>
+    <div id="container">
+        <div id="ui">
+            <div id="toggleUI">◀</div>
+            <h1 id="title">Puzzle</h1>
+
+            <div class="controls">
+                <div>
+                    <select id="difficulty">
+                        <option value="2">2x2</option>
+                        <option value="3">3x3</option>
+                        <option value="4" selected>4x4</option>
+                        <option value="5">5x5</option>
+                        <option value="6">6X6</option>
+                        <option value="7">7X7</option>
+                        <option value="8">8X8</option>
+                        <option value="9">9X9</option>
+                        <option value="10">10X10</option>
+                        <option value="15">15X15</option>
+                    </select>
+                </div>
+
+                <div class="mode-selector">
+                    <button id="modeMove" class="mode-btn active">Move</button>
+                    <button id="modeRotate" class="mode-btn">Rotate</button>
+                </div>
+                
+                <button id="shuffleBtn">Shuffle</button>
+                <button id="solveBtn">Solution</button>
+                <button id="newImageBtn">Random Image</button>
+
+                <div class="language-selector">
+                    <button id="languageBtn" class="language-btn">
+                        <span id="currentLanguage">English</span>
+                        <span class="language-chevron">▼</span>
+                    </button>
+                    <div id="languageDropdown" class="language-dropdown">
+                        <div class="language-option" data-lang="en">
+                            <span>English</span>
+                        </div>
+                        <div class="language-option" data-lang="fr">
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" data-lang="es">
+                            <span>Español</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-credit" id="imageCredit">
+                    Image Unsplash
+                </div>
+            </div>
+        </div>
+
+        <div id="preview">
+            <img id="previewImage" src="" alt="Image du puzzle">
+        </div>
+        
+        <div id="hint">
+            Move Mode ('+'): click a piece, then another piece to swap<br>
+            Rotate Mode ('-'): click and drag to rotate. Mouse wheel to zoom
+        </div>
+
+
+        <div id="message"></div>
+    </div>
+    <div class="copy">&Toc</div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js'></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
