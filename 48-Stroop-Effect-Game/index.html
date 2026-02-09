@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Stroop Effect Game</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="app">
+	<header class="top">
+		<div class="stats">
+			<div class="stat">
+				<div class="label">Time</div>
+				<div class="value" id="time">30</div>
+			</div>
+
+			<div class="stat">
+				<div class="label">Score</div>
+				<div class="value" id="score">0</div>
+			</div>
+
+			<div class="stat">
+				<div class="label">Mistakes</div>
+				<div class="value"><span id="mistakes">0</span>/3</div>
+			</div>
+		</div>
+	</header>
+
+	<main class="game">
+		<div id="card" class="card" aria-live="polite">
+			<div id="prompt" class="prompt">GET READY</div>
+			<div class="hint">Pick the button that matches the <b>INK COLOR</b>.</div>
+		</div>
+
+		<div id="buttons" class="buttons"></div>
+	</main>
+
+	<div id="overlay" class="overlay hidden">
+		<div class="modal">
+			<h2 id="endTitle">Game Over</h2>
+			<p id="endText">Your score: 0</p>
+			<button id="restartBtn" class="reStart">Play again</button>
+		</div>
+	</div>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
