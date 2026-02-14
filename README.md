@@ -52,3 +52,4 @@ This repository contains a collection of HTML, CSS, and JavaScript games. ðŸŽ¯ðŸ
 | 46  | [Puzzle Playtron Minesweeper](https://github.com/codetap-org/web-games/tree/main/46-Puzzle-Playtron-Minesweeper)       | [Live Demo](https://codetap-org.github.io/web-games/46-Puzzle-Playtron-Minesweeper/)    |
 | 47  | [Untanglea Puzzle Game](https://github.com/codetap-org/web-games/tree/main/47-Untanglea-Puzzle-Game)                   | [Live Demo](https://codetap-org.github.io/web-games/47-Untanglea-Puzzle-Game/)          |
 | 48  | [Stroop Effect Game](https://github.com/codetap-org/web-games/tree/main/48-Stroop-Effect-Game)                         | [Live Demo](https://codetap-org.github.io/web-games/48-Stroop-Effect-Game/)             |
+| 49  | [Basket Game](https://github.com/codetap-org/web-games/tree/main/49-Basket-Game)                                       | [Live Demo](https://codetap-org.github.io/web-games/49-Basket-Game/)                    |
