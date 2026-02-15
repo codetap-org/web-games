@@ -1,0 +1,90 @@
+body {
+	font-family: sans-serif;
+	background: #444;
+	color: #aaa;
+	transition: 300ms background, 300ms color;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+.ui {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.word {
+	white-space: nowrap;
+	margin-bottom: 6vh;
+	font-family: monospace;
+}
+
+.letter {
+	vertical-align: top;
+	display: inline-block;
+	width: 0.75em;
+	height: 1.5em;
+	margin: 0 0.125em;
+	font-size: min(20vh, 4vw);
+	font-weight: bold;
+	text-shadow: .04em .04em .1em #fff8, -.04em -.04em .1em #0006;
+/* 	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: var(--outline, black); */
+	position: relative;
+	overflow: hidden;
+	&:after {
+		position: absolute;
+		content: "";
+		bottom: 0em;
+		height: .1em;
+		background: currentColor;
+		right: 0em;
+		left: 0em;
+		transition: 100ms all ease-out;
+	}
+	&.filled:after {
+		bottom: .6em;
+		left: .25em;
+		right: .25em;
+		opacity: 0;
+	}
+}
+
+.ui input {
+	font-size: min(10vh, 2.5vw);
+	width: 1em;
+	height: 1em;
+	background: #fff1;
+	border: 1px #0005 solid;
+	color: inherit;
+}
+
+.ui button {
+	font-size: min(10vh, 2.5vw);
+	width: 1.5em;
+	height: 1.5em;
+	border: none;
+	background: #0000;
+	cursor: pointer;
+}
+
+.bad-guesses {
+	height: 1.5em;
+}
+.bad-guesses span {
+	text-decoration: line-through;
+	display: inline-block;
+	padding: 0.25em;
+	font-size: 6vmin;
+	text-shadow: 1px 1px #000c;
+	font-weight: bold;
+}
+
+.lives {
+	margin-top: 1em;
+	line-height: 2em;
+	font-size: min(5vh, 1vw);
+	text-shadow: 0 0 .1em #000;
+}
