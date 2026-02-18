@@ -54,3 +54,5 @@ This repository contains a collection of HTML, CSS, and JavaScript games. ðŸŽ¯ðŸ
 | 48  | [Stroop Effect Game](https://github.com/codetap-org/web-games/tree/main/48-Stroop-Effect-Game)                         | [Live Demo](https://codetap-org.github.io/web-games/48-Stroop-Effect-Game/)             |
 | 49  | [Basket Game](https://github.com/codetap-org/web-games/tree/main/49-Basket-Game)                                       | [Live Demo](https://codetap-org.github.io/web-games/49-Basket-Game/)                    |
 | 50  | [Css Colour Hangman](https://github.com/codetap-org/web-games/tree/main/50-Css-Colour-Hangman)                         | [Live Demo](https://codetap-org.github.io/web-games/50-Css-Colour-Hangman/)             |
+| 51  | [Memory Unmasked Game](https://github.com/codetap-org/web-games/tree/main/51-Memory-Unmasked-Game)                     | [Live Demo](https://codetap-org.github.io/web-games/51-Memory-Unmasked-Game/)           |
+| 52  | [Subway Super Hopper Game](https://github.com/codetap-org/web-games/tree/main/52-Subway-Super-Hopper-Game)             | [Live Demo](https://codetap-org.github.io/web-games/52-Subway-Super-Hopper-Game/)       |
