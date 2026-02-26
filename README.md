@@ -56,3 +56,4 @@ This repository contains a collection of HTML, CSS, and JavaScript games. ðŸŽ¯ðŸ
 | 50  | [Css Colour Hangman](https://github.com/codetap-org/web-games/tree/main/50-Css-Colour-Hangman)                         | [Live Demo](https://codetap-org.github.io/web-games/50-Css-Colour-Hangman/)             |
 | 51  | [Memory Unmasked Game](https://github.com/codetap-org/web-games/tree/main/51-Memory-Unmasked-Game)                     | [Live Demo](https://codetap-org.github.io/web-games/51-Memory-Unmasked-Game/)           |
 | 52  | [Subway Super Hopper Game](https://github.com/codetap-org/web-games/tree/main/52-Subway-Super-Hopper-Game)             | [Live Demo](https://codetap-org.github.io/web-games/52-Subway-Super-Hopper-Game/)       |
+| 53  | [Emoji Survivors Game](https://github.com/codetap-org/web-games/tree/main/53-Emoji-Survivors-Game)                     | [Live Demo](https://codetap-org.github.io/web-games/53-Emoji-Survivors-Game/)           |
