@@ -1,0 +1,486 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;650;800&display=swap");
+
+:root {
+  --paper: #f4f1ea;
+  --surface: #fbf8f1;
+  --ink: #24231f;
+  --muted: #8b8478;
+  --line: #d8d0c3;
+  --slice: rgba(36, 35, 31, 0.13);
+  --target-slice: rgba(36, 35, 31, 0.075);
+  --shadow: rgba(46, 39, 30, 0.11);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.game {
+  position: relative;
+  width: min(92vw, 430px);
+  min-height: 660px;
+  display: grid;
+  grid-template-rows: auto auto auto 58px auto;
+  justify-items: center;
+  align-content: center;
+  gap: 22px;
+  padding: 42px 32px 34px;
+  text-align: center;
+  user-select: none;
+}
+
+.help {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.help:hover,
+.help:focus-visible,
+.help[aria-expanded="true"] {
+  color: var(--ink);
+  border-color: var(--ink);
+  outline: none;
+}
+
+.tooltip {
+  position: absolute;
+  top: 70px;
+  right: 28px;
+  z-index: 20;
+  width: min(280px, calc(100vw - 56px));
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 18px 44px var(--shadow);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 140ms ease, transform 140ms ease, visibility 140ms ease;
+}
+
+.tooltip.open,
+.help:hover + .tooltip,
+.help:focus-visible + .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  width: 10px;
+  height: 10px;
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  transform: rotate(45deg);
+}
+
+.tooltip strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.tooltip span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.target {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.target p,
+.summary-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.target h1 {
+  margin: 0;
+  font-size: clamp(5.4rem, 20vw, 8.8rem);
+  font-weight: 800;
+  line-height: 0.78;
+  letter-spacing: 0;
+}
+
+.fraction {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.085em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fraction__slash {
+  margin-inline: 0.035em;
+  font-weight: 650;
+  opacity: 0.85;
+  transform: translateY(-0.02em);
+}
+
+.instruction {
+  height: 18px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.board {
+  width: min(76vw, 330px);
+  display: block;
+  overflow: visible;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.disc {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  filter: drop-shadow(0 18px 22px var(--shadow));
+  transition: opacity 180ms ease;
+}
+
+.disc.faded {
+  opacity: 0.28;
+}
+
+.parts {
+  pointer-events: none;
+}
+
+.part {
+  fill: transparent;
+  stroke: var(--ink);
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  vector-effect: non-scaling-stroke;
+}
+
+.part.is-target {
+  fill: var(--target-slice);
+}
+
+.parts.is-visible .part {
+  animation: part-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--index) * 52ms);
+}
+
+@keyframes part-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.user-slice {
+  fill: var(--slice);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 160ms ease,
+    transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.user-slice.is-visible {
+  opacity: 1;
+}
+
+.target-slice {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  stroke-dasharray: 3 5;
+  stroke-linejoin: round;
+  opacity: 0;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 180ms ease;
+}
+
+.target-slice.is-visible {
+  opacity: 0.58;
+}
+
+.base-line,
+.cut-line {
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.base-line {
+  stroke: rgba(36, 35, 31, 0.12);
+  stroke-width: 1.35;
+}
+
+.cut-line {
+  stroke: var(--ink);
+  stroke-width: 1.45;
+  opacity: 0.82;
+  transition: opacity 160ms ease;
+}
+
+.base-line.is-locked,
+.cut-line.is-locked,
+.centre.is-locked {
+  opacity: 0.25;
+}
+
+.centre {
+  fill: var(--ink);
+  transition: opacity 160ms ease;
+}
+
+.result {
+  height: 58px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+}
+
+.result span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.result strong {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.next {
+  min-width: 82px;
+  padding: 10px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 150ms ease, opacity 150ms ease;
+}
+
+.next:disabled {
+  cursor: default;
+  opacity: 0.32;
+}
+
+.next:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.next:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.summary {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 18px;
+  padding: 42px 32px 34px;
+  background: var(--paper);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.summary[hidden] {
+  display: none;
+}
+
+.summary.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.summary h2 {
+  margin: 0;
+  font-size: clamp(3.8rem, 16vw, 6.8rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+}
+
+.analysis {
+  max-width: 310px;
+  min-height: 36px;
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.stats {
+  width: min(100%, 330px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stats div {
+  display: grid;
+  gap: 4px;
+  padding: 13px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.stats span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.stats strong {
+  font-size: 14px;
+}
+
+.attempts {
+  width: min(100%, 340px);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.attempt {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+
+.attempt svg {
+  width: 44px;
+  height: 44px;
+  overflow: visible;
+}
+
+.attempt circle {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.mini-user {
+  fill: var(--slice);
+}
+
+.mini-target {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.9;
+  stroke-dasharray: 2 3;
+}
+
+.attempt span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.credit {
+  position: fixed;
+  right: 18px;
+  bottom: 16px;
+  color: rgba(36, 35, 31, 0.28);
+  text-decoration: none;
+  font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.08em;
+}
+
+.credit:hover {
+  color: rgba(36, 35, 31, 0.62);
+}
+
+@media (max-width: 520px) {
+  .game {
+    min-height: 640px;
+    gap: 18px;
+    padding: 38px 22px 28px;
+  }
+
+  .help {
+    top: 22px;
+    right: 22px;
+  }
+
+  .tooltip {
+    top: 64px;
+    right: 22px;
+  }
+
+  .attempts {
+    gap: 8px;
+  }
+
+  .attempt svg {
+    width: 38px;
+    height: 38px;
+  }
+}

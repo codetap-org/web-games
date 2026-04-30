@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Ratio - Math Game | CodeTap</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <main class="game" id="game">
+  <button class="help" id="help" type="button" aria-label="How to play" aria-expanded="false">?</button>
+
+  <div class="tooltip" id="tooltip" role="tooltip">
+    <strong>How to play</strong>
+    <span>There are 10 rounds. Match the target fraction by moving the cut line around the circle, then click once to slice. After each cut, the circle divides into the correct number of equal parts.</span>
+  </div>
+
+  <section class="target">
+    <p id="roundText">Round 1 / 10</p>
+    <h1 id="targetText" aria-label="Target"></h1>
+  </section>
+
+  <p class="instruction" id="instruction">Move the cut line. Click to slice.</p>
+
+  <svg class="board" id="board" viewBox="-190 -190 380 380" aria-label="Slice game">
+    <circle class="disc" id="disc" r="132"></circle>
+
+    <g id="parts" class="parts"></g>
+
+    <path class="user-slice" id="userSlice"></path>
+    <path class="target-slice" id="targetSlice"></path>
+
+    <line class="base-line" id="baseLine" x1="0" y1="0" x2="0" y2="-132"></line>
+    <line class="cut-line" id="cutLine" x1="0" y1="0" x2="0" y2="-132"></line>
+    <circle class="centre" id="centre" r="3.5"></circle>
+  </svg>
+
+  <section class="result" aria-live="polite">
+    <span id="cutResult"></span>
+    <strong id="score"></strong>
+  </section>
+
+  <button class="next" id="next" type="button" disabled>Next</button>
+
+  <section class="summary" id="summary" hidden>
+    <p class="summary-label">Results</p>
+    <h2 id="averageError">0.0%</h2>
+    <p class="analysis" id="analysis"></p>
+
+    <div class="stats">
+      <div>
+        <span>Best cut</span>
+        <strong id="bestCut">—</strong>
+      </div>
+      <div>
+        <span>Average bias</span>
+        <strong id="bias">—</strong>
+      </div>
+    </div>
+
+    <div class="attempts" id="attempts"></div>
+
+    <button class="next" id="again" type="button">Play again</button>
+  </section>
+</main>
+
+<a class="credit" href="https://calculatequick.com" target="_blank" rel="noopener">calculatequick.com</a>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
